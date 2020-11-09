@@ -17,21 +17,12 @@ x-base-env-vars: &base-env
 
 deploy:
   locations:
-    staging:
-      environment: &staging-env
-        envVars: *base-env
-      notification:
-        message: |
-          Application index: https://edu-antiplagiat.${hostFqdn}
     production:
       environment:
         envVars: *base-env
       notification:
         message: |
-          Application index: https://edu-antiplagiat.skyeng.ru
-
-development: &development-env
-  <<: *staging-env
+          Application index: https://edu-antiplagiat.skyeng.link
 
 #test:
 #  skippable: false
