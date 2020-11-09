@@ -14,7 +14,7 @@ services:
         USER_ID: "${user_id}"
     command: ng serve --host 0.0.0.0 --port 4200 --disable-host-check
     ports:
-      - 8888:4200
+      - 10015:4200
     volumes:
       - .:/opt/app:cached
     env_file:

@@ -34,7 +34,7 @@ services:
     volumes:
       - logs:/opt/app/var/log
     ports:
-      - 8888:80
+      - 10015:80
     healthcheck:
       test: ["CMD", "curl", "127.0.0.1/_/infra/nginx/healthcheck"]
       interval: ${SWARM_SERVICE_HEALTHCHECK_INTERVAL}
