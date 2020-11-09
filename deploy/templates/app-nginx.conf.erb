@@ -1,0 +1,26 @@
+map $sent_http_content_type $expires {
+    default                    1d;
+    text/html                  epoch;
+    text/css                   max;
+    application/javascript     max;
+    application/woff2          max;
+    ~image/                    30d;
+}
+
+server {
+  server_name <%= ENV.fetch('NGINX_SERVER_NAME') %>;
+  listen 80;
+
+  set $root /opt/app;
+  root $root/dist;
+
+  include include/server_base.conf;
+  include include/server_restrict_locations.conf;
+
+  expires $expires;
+
+  location / {
+    try_files $uri /index.html;
+  }
+
+}

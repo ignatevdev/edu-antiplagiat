@@ -1,0 +1,15 @@
+FROM registry.skyeng.tv/base/angular8:1.1.8 as cache
+
+ARG BUILD_OPTIONS=--prod
+ARG GITHUB_RSA
+
+WORKDIR /opt/app
+
+COPY package.json yarn.lock ./
+
+RUN ( \
+        setup-github-ssh-access \
+        && yarn install --frozen-lockfile \
+        && yarn cache clean \
+        && cleanup-github-ssh-access \
+    )

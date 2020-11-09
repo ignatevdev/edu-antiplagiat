@@ -1,0 +1,32 @@
+version: "3.7"
+
+networks:
+  default:
+    external:
+      name: infra_default
+
+services:
+  ngserve:
+    build:
+      dockerfile: deploy/docker/dev/Dockerfile_dev
+      context: .
+      args:
+        USER_ID: "${user_id}"
+    command: ng serve --host 0.0.0.0 --port 4200 --disable-host-check
+    ports:
+      - 8888:4200
+    volumes:
+      - .:/opt/app:cached
+    env_file:
+      - ./.env
+    environment:
+      CONTAINER_CONFIG: >
+        [
+          {
+            "source": "/opt/app/deploy/templates/vars.ts.erb",
+            "target": "/opt/app/src/environments/vars.ts"
+          }
+        ]
+    networks:
+      - default
+    restart: unless-stopped

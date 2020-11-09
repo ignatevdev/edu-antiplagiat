@@ -1,0 +1,9 @@
+FROM registry.skyeng.tv/base/angular8:1.1.8
+
+USER root
+
+# setting user_id equal to developer's one
+ARG USER_ID
+RUN usermod -u $USER_ID node
+
+USER node

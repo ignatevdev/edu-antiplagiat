@@ -1,0 +1,40 @@
+---
+build:
+  docker:
+    image:
+      cache: registry.skyeng.tv/skysmart/edu-antiplagiat-cache
+      nginx: registry.skyeng.tv/skysmart/edu-antiplagiat-nginx
+    commands:
+      cache: docker build --target cache --build-arg GITHUB_TOKEN -t ${cacheImage} -f deploy/docker/build/Dockerfile_cache .
+      nginx: docker build -t ${nginxImage} --build-arg CACHE_CHECKSUM=`bash deploy/docker/build/cache-files-checksum.sh` --target nginx -f deploy/docker/build/Dockerfile .
+    tags:
+      cache: bash deploy/docker/build/cache-files-checksum.sh
+      nginx: bash deploy/docker/build/project-files-checksum.sh
+
+x-base-env-vars: &base-env
+  BASE_DOMAIN: { inherit: ~ }
+  NGINX_SERVER_NAME: edu-antiplagiat.${inherit.BASE_DOMAIN}
+
+deploy:
+  locations:
+    staging:
+      environment: &staging-env
+        envVars: *base-env
+      notification:
+        message: |
+          Application index: https://edu-antiplagiat.${hostFqdn}
+    production:
+      environment:
+        envVars: *base-env
+      notification:
+        message: |
+          Application index: https://edu-antiplagiat.skyeng.ru
+
+development: &development-env
+  <<: *staging-env
+
+#test:
+#  skippable: false
+#  base-environment: staging-yandex-docker
+#  environment: *development-env
+#  command: docker run --rm --env-file=./.env ${phpImage} vendor/bin/phpunit

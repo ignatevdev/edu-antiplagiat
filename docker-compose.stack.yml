@@ -1,0 +1,61 @@
+version: "3.7"
+
+networks:
+  proxy:
+    external: true
+    name: proxy
+
+volumes:
+  logs:
+    external: true
+    name: logs
+
+x-acl: &acl
+  io.portainer.accesscontrol.teams: Infra
+
+services:
+  nginx:
+    image: registry.skyeng.tv/skysmart/edu-antiplagiat-nginx:${IMAGE_TAG_nginx}
+    env_file:
+      - ./.env
+    environment:
+      CONTAINER_CONFIG: >
+        [
+          {
+            "source": "/etc/nginx/sites-templates/app-nginx.conf.erb",
+            "target": "/etc/nginx/sites-enabled/edu-antiplagiat.conf"
+          }, {
+            "source": "/opt/app/dist",
+            "target": "/opt/app/dist"
+          }
+        ]
+    networks:
+      - proxy
+    volumes:
+      - logs:/opt/app/var/log
+    ports:
+      - 8888:80
+    healthcheck:
+      test: ["CMD", "curl", "127.0.0.1/_/infra/nginx/healthcheck"]
+      interval: ${SWARM_SERVICE_HEALTHCHECK_INTERVAL}
+      timeout: ${SWARM_SERVICE_HEALTHCHECK_TIMEOUT}
+      start_period: ${SWARM_SERVICE_START_PERIOD}
+    labels:
+      <<: *acl
+    deploy:
+      labels:
+        com.df.notify: "true"
+        com.df.serviceDomain: "${NGINX_SERVER_NAME}"
+        com.df.srcPort: "${DF_HTTP_PORT}"
+        com.df.port: "80"
+      mode: replicated
+      replicas: ${SWARM_NGINX_REPLICAS}
+      placement: ${SWARM_SERVICE_PLACEMENT}
+      update_config:
+        parallelism: 0
+        failure_action: rollback
+        order: start-first
+      rollback_config:
+        parallelism: 0
+        failure_action: pause
+        order: start-first

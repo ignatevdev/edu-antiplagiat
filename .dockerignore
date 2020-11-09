@@ -1,0 +1,7 @@
+.git/
+.github/
+.env
+Jenkinsfile
+JenkinsfileRollback
+deploy/docker
+var/log/*

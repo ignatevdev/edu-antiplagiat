@@ -1,0 +1,21 @@
+{
+  "skyexec-version": "0.1.2",
+  "team": "skysmart",
+  "project": "edu-antiplagiat",
+  "dev": {
+    "up-commands": [
+      "echo '===> Cleanup'",
+      "touch .env && dev-compose down --remove-orphans",
+      "echo '===> Build images'",
+      "dev-compose build",
+      "echo '===> Install deps'",
+      "dev-compose run --rm -T --entrypoint yarn ngserve install",
+      "echo '===> Bring up the project'",
+      "dev-compose up -d"
+    ],
+    "features": {
+      "update-env-file": {},
+      "remote-development": {}
+    }
+  }
+}
