@@ -11,7 +11,7 @@ volumes:
     name: logs
 
 x-acl: &acl
-  io.portainer.accesscontrol.teams: Infra
+  io.portainer.accesscontrol.teams: InfraDevOps,InfraSRE,InfraSupport,InfrastructureCore
 
 services:
   nginx:
