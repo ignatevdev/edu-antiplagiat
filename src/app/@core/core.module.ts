@@ -3,21 +3,21 @@ import {
   NgModule,
   Optional,
   SkipSelf,
-} from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { NbAuthModule } from "@nebular/auth";
-import { NbSecurityModule, NbRoleProvider } from "@nebular/security";
-import { of as observableOf } from "rxjs";
+} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NbAuthModule } from '@nebular/auth';
+import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
+import { of as observableOf } from 'rxjs';
 
-import { throwIfAlreadyLoaded } from "./module-import-guard";
-import { LayoutService, SeoService } from "./utils";
+import { throwIfAlreadyLoaded } from './module-import-guard';
+import { LayoutService, SeoService } from './utils';
 
 const DATA_SERVICES = [];
 
 export class NbSimpleRoleProvider extends NbRoleProvider {
   getRole() {
     // here you could provide any role based on any auth flow
-    return observableOf("guest");
+    return observableOf('guest');
   }
 }
 
@@ -28,13 +28,13 @@ export const NB_CORE_PROVIDERS = [
   NbSecurityModule.forRoot({
     accessControl: {
       guest: {
-        view: "*",
+        view: '*',
       },
       user: {
-        parent: "guest",
-        create: "*",
-        edit: "*",
-        remove: "*",
+        parent: 'guest',
+        create: '*',
+        edit: '*',
+        remove: '*',
       },
     },
   }).providers,
@@ -54,7 +54,7 @@ export const NB_CORE_PROVIDERS = [
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
-    throwIfAlreadyLoaded(parentModule, "CoreModule");
+    throwIfAlreadyLoaded(parentModule, 'CoreModule');
   }
 
   static forRoot(): ModuleWithProviders<CoreModule> {

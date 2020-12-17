@@ -1,27 +1,26 @@
-import { ExtraOptions, RouterModule, Routes } from "@angular/router";
-import { NgModule } from "@angular/core";
-import { AuthGuard } from "./auth-guard.service";
+import { ExtraOptions, RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { AuthGuard } from './auth-guard.service';
 
 export const routes: Routes = [
   {
-    path: "pages",
+    path: 'pages',
     canActivate: [AuthGuard],
     data: {
       authorizedOnly: true,
     },
-    loadChildren: () =>
-      import("./pages/pages.module").then((m) => m.PagesModule),
+    loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule),
   },
   {
-    path: "auth",
+    path: 'auth',
     canActivate: [AuthGuard],
     data: {
       unauthorizedOnly: true,
     },
-    loadChildren: () => import("./auth/auth.module").then((m) => m.AuthModule),
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
   },
-  { path: "", redirectTo: "/pages/content/math", pathMatch: "full" },
-  { path: "**", redirectTo: "/pages/content/math" },
+  { path: '', redirectTo: '/pages/content/math', pathMatch: 'full' },
+  { path: '**', redirectTo: '/pages/content/math' },
 ];
 
 const config: ExtraOptions = {

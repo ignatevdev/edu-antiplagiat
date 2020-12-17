@@ -1,12 +1,12 @@
-import { Component, Input } from "@angular/core";
-import { FormArray, FormGroup } from "@angular/forms";
+import { Component, Input, OnInit } from '@angular/core';
+import { FormArray, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: "ap-catalogs-form",
-  templateUrl: "./catalogs-form.component.html",
-  styleUrls: ["./catalogs-form.component.scss"],
+  selector: 'ngx-catalogs-form',
+  templateUrl: './catalogs-form.component.html',
+  styleUrls: ['./catalogs-form.component.scss'],
 })
-export class CatalogsFormComponent {
+export class CatalogsFormComponent implements OnInit {
   @Input() public form: FormGroup;
 
   get meta(): FormGroup {

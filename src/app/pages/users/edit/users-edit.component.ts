@@ -1,21 +1,21 @@
-import { HttpClient } from "@angular/common/http";
-import { Component } from "@angular/core";
-import { FormArray, FormControl, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { UsersDataSource } from "../utils/users-data-source";
-import { userPermissions } from "../utils/constants";
+import { UsersDataSource } from '../utils/users-data-source';
+import { userPermissions } from '../utils/constants';
 
 @Component({
-  selector: "ap-users-edit",
-  templateUrl: "./users-edit.component.html",
-  styleUrls: ["./users-edit.component.scss"],
+  selector: 'ngx-users-edit',
+  templateUrl: './users-edit.component.html',
+  styleUrls: ['./users-edit.component.scss'],
 })
-export class UsersEditComponent {
+export class UsersEditComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {
     this.addCheckboxes();
 
@@ -27,10 +27,10 @@ export class UsersEditComponent {
   }
 
   form = new FormGroup({
-    first_name: new FormControl("", [Validators.required]),
-    last_name: new FormControl("", [Validators.required]),
-    email: new FormControl("", [Validators.required, Validators.email]),
-    password: new FormControl("", []),
+    first_name: new FormControl('', [Validators.required]),
+    last_name: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', []),
     permissions: new FormArray([]),
   });
 
@@ -41,20 +41,20 @@ export class UsersEditComponent {
   availablePermissions = userPermissions;
 
   ngOnInit() {
-    const id = this.activatedRoute.snapshot.paramMap.get("id");
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
 
-    this.source.find({ id }).then((user) => {
+    this.source.find({ id }).then(user => {
       this.user = user;
 
-      const permissions = this.availablePermissions.map((id) =>
-        user.permissions.includes(id)
+      const permissions = this.availablePermissions.map(permissionId =>
+        user.permissions.includes(permissionId),
       );
 
       this.form.setValue({
         first_name: user.first_name,
         last_name: user.last_name,
         email: user.email,
-        password: "",
+        password: '',
         permissions,
       });
     });
@@ -65,7 +65,7 @@ export class UsersEditComponent {
       const values = {
         id: this.user.id,
         ...this.form.value,
-        permissions: this.form.value["permissions"].reduce(
+        permissions: this.form.value['permissions'].reduce(
           (reduction, enabled, index) => {
             if (enabled) {
               return [...reduction, this.availablePermissions[index]];
@@ -73,22 +73,22 @@ export class UsersEditComponent {
 
             return reduction;
           },
-          []
+          [],
         ),
-        password: this.form.value["password"].length
-          ? this.form.value["password"]
+        password: this.form.value['password'].length
+          ? this.form.value['password']
           : undefined,
       };
 
       this.source.update(values).then((data: any) => {
-        this.router.navigateByUrl("/pages/users");
+        this.router.navigateByUrl('/pages/users');
       });
     }
   }
 
   private addCheckboxes() {
     this.availablePermissions.forEach(() =>
-      this.permissionsFormArray.push(new FormControl(false))
+      this.permissionsFormArray.push(new FormControl(false)),
     );
   }
 }

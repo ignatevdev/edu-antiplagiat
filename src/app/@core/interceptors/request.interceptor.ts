@@ -1,30 +1,30 @@
-import { Inject, Injectable, Injector } from "@angular/core";
+import { Inject, Injectable, Injector } from '@angular/core';
 import {
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
-} from "@angular/common/http";
-import { Observable } from "rxjs";
-import { switchMap } from "rxjs/operators";
+} from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 import {
   NbAuthService,
   NB_AUTH_INTERCEPTOR_HEADER,
   NbAuthSimpleToken,
-} from "@nebular/auth";
+} from '@nebular/auth';
 
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {
   constructor(
     private injector: Injector,
     @Inject(NB_AUTH_INTERCEPTOR_HEADER)
-    protected headerName: string = "Authorization"
+    protected headerName: string = 'Authorization',
   ) {}
 
   intercept(
     req: HttpRequest<any>,
-    next: HttpHandler
+    next: HttpHandler,
   ): Observable<HttpEvent<any>> {
     return this.authService.getToken().pipe(
       switchMap((token: NbAuthSimpleToken) => {
@@ -36,7 +36,7 @@ export class RequestInterceptor implements HttpInterceptor {
           });
         }
         return next.handle(req);
-      })
+      }),
     );
   }
 

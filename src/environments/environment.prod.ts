@@ -6,7 +6,7 @@
 export const environment = {
   production: true,
   api: {
-    protocol: "http",
-    host: "localhost:8001",
+    protocol: 'http',
+    host: 'localhost:8001',
   },
 };

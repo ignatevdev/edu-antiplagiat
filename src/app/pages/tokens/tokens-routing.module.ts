@@ -1,21 +1,21 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
-import { TokensComponent } from "./tokens.component";
-import { TokensListComponent } from "./list/tokens-list.component";
-import { TokensCreateComponent } from "./create/tokens-create.component";
+import { TokensComponent } from './tokens.component';
+import { TokensListComponent } from './list/tokens-list.component';
+import { TokensCreateComponent } from './create/tokens-create.component';
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: TokensComponent,
     children: [
       {
-        path: "",
+        path: '',
         component: TokensListComponent,
       },
       {
-        path: "create",
+        path: 'create',
         component: TokensCreateComponent,
       },
     ],

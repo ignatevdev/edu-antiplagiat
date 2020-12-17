@@ -1,14 +1,14 @@
-import { Component, Input } from "@angular/core";
-import { FormArray, FormGroup } from "@angular/forms";
+import { Component, Input, OnInit } from '@angular/core';
+import { FormArray, FormGroup } from '@angular/forms';
 
-import { userPermissionNames } from "../utils/constants";
+import { userPermissionNames } from '../utils/constants';
 
 @Component({
-  selector: "ap-users-form",
-  templateUrl: "./users-form.component.html",
-  styleUrls: ["./users-form.component.scss"],
+  selector: 'ngx-users-form',
+  templateUrl: './users-form.component.html',
+  styleUrls: ['./users-form.component.scss'],
 })
-export class UsersFormComponent {
+export class UsersFormComponent implements OnInit {
   @Input() public form: FormGroup;
   @Input() public availablePermissions: string[];
 

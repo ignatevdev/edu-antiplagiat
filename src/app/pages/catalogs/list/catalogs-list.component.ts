@@ -1,19 +1,19 @@
-import { Component } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { ActivatedRoute, Router } from "@angular/router";
-import { DatePipe } from "@angular/common";
-import { NbDialogService } from "@nebular/theme";
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
+import { NbDialogService } from '@nebular/theme';
 
-import { CatalogsDataSource } from "../utils/catalogs-data-source";
+import { CatalogsDataSource } from '../utils/catalogs-data-source';
 
-import { DeleteConfirmationDialog } from "./delete-confirmation-dialog/delete-confirmation-dialog.component";
+import { DeleteConfirmationDialogComponent } from './delete-confirmation-dialog/delete-confirmation-dialog.component';
 
-import { catalogNames } from "../utils/constants";
+import { catalogNames } from '../utils/constants';
 
 @Component({
-  selector: "ap-catalogs-list",
-  templateUrl: "./catalogs-list.component.html",
-  styleUrls: ["./catalogs-list.component.scss"],
+  selector: 'ngx-catalogs-list',
+  templateUrl: './catalogs-list.component.html',
+  styleUrls: ['./catalogs-list.component.scss'],
 })
 export class CatalogsListComponent {
   constructor(
@@ -21,20 +21,20 @@ export class CatalogsListComponent {
     private dialogService: NbDialogService,
     private datePipe: DatePipe,
     private router: Router,
-    private activatedRotue: ActivatedRoute
+    private activatedRotue: ActivatedRoute,
   ) {
-    const catalog = this.activatedRotue.snapshot.paramMap.get("catalog");
+    const catalog = this.activatedRotue.snapshot.paramMap.get('catalog');
 
     this.catalog = catalog;
 
     this.source = new CatalogsDataSource(http, catalog);
 
-    this.activatedRotue.params.subscribe((params) => {
+    this.activatedRotue.params.subscribe(params => {
       this.catalog = params.catalog;
 
       this.source.setCatalog(params.catalog);
 
-      this.source.getElements().then((data) => {
+      this.source.getElements().then(data => {
         this.source.load(data);
       });
     });
@@ -45,31 +45,30 @@ export class CatalogsListComponent {
 
   settings: any = {
     actions: {
-      columnTitle: "Действия",
+      columnTitle: 'Действия',
       add: false,
-      position: "right",
+      position: 'right',
     },
     edit: {
-      editButtonContent: "Редактировать",
+      editButtonContent: 'Редактировать',
     },
     delete: {
-      deleteButtonContent: "Удалить",
+      deleteButtonContent: 'Удалить',
     },
     sort: false,
     hideSubHeader: true,
-    mode: "external",
+    mode: 'external',
     columns: {
       name: {
-        title: "Название",
+        title: 'Название',
         sort: false,
       },
       created_at: {
-        title: "Дата добавления",
-        valuePrepareFunction: (date) => {
-          var raw = new Date(date);
+        title: 'Дата добавления',
+        valuePrepareFunction: date => {
+          const raw = new Date(date);
 
-          var formatted = this.datePipe.transform(raw, "dd.MM.yyyy");
-          return formatted;
+          return this.datePipe.transform(raw, 'dd.MM.yyyy');
         },
         sort: false,
       },
@@ -82,13 +81,13 @@ export class CatalogsListComponent {
     this.source.reset();
   };
 
-  onEdit = (e) => {
+  onEdit = e => {
     this.router.navigateByUrl(
-      `/pages/catalogs/${this.catalog}/edit/${e.data.id}`
+      `/pages/catalogs/${this.catalog}/edit/${e.data.id}`,
     );
   };
 
-  onDelete = (e) => {
+  onDelete = e => {
     const { id } = e.data;
 
     const onDelete = async () => {
@@ -99,7 +98,7 @@ export class CatalogsListComponent {
       this.source.load(data);
     };
 
-    this.dialogService.open(DeleteConfirmationDialog, {
+    this.dialogService.open(DeleteConfirmationDialogComponent, {
       context: {
         onDelete,
       },

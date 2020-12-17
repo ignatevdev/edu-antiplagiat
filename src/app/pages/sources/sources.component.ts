@@ -1,7 +1,7 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 @Component({
-  selector: "ap-sources",
+  selector: 'ngx-sources',
   template: ` <router-outlet></router-outlet> `,
 })
 export class SourcesComponent {}

@@ -4,20 +4,20 @@ import {
   OnInit,
   OnChanges,
   SimpleChanges,
-} from "@angular/core";
+} from '@angular/core';
 
-import { DefaultFilter } from "ng2-smart-table";
+import { DefaultFilter } from 'ng2-smart-table';
 
-import { HttpClient } from "@angular/common/http";
-import { Column } from "ng2-smart-table/lib/lib/data-set/column";
-import { FormControl } from "@angular/forms";
-import { SourcesDataSource } from "../../utils/sources-data-source";
-import { subjectOptions } from "../../content/utils/constants";
+import { HttpClient } from '@angular/common/http';
+import { Column } from 'ng2-smart-table/lib/lib/data-set/column';
+import { FormControl } from '@angular/forms';
+import { SourcesDataSource } from '../../utils/sources-data-source';
+import { subjectOptions } from '../../content/utils/constants';
 
 @Component({
-  templateUrl: "./subject-filter.component.html",
+  templateUrl: './subject-filter.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ["./subject-filter.component.scss"],
+  styleUrls: ['./subject-filter.component.scss'],
 })
 export class SubjectFilterComponent
   extends DefaultFilter
@@ -36,7 +36,7 @@ export class SubjectFilterComponent
   subjectOptions = subjectOptions;
 
   ngOnInit() {
-    this.selectControl.valueChanges.subscribe((value) => {
+    this.selectControl.valueChanges.subscribe(value => {
       this.query = value;
       this.setFilter();
     });

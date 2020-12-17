@@ -1,8 +1,8 @@
-import { Component, Input, OnChanges, OnInit } from "@angular/core";
-import { ViewCell } from "ng2-smart-table";
+import { Component, Input } from '@angular/core';
+import { ViewCell } from 'ng2-smart-table';
 
 @Component({
-  selector: "ap-source-link-component",
+  selector: 'ngx-source-link-component',
   template: `
     <a *ngIf="!!value" [href]="value" target="_blank">Ссылка</a>
     <span *ngIf="!value">—</span>

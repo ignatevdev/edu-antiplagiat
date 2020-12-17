@@ -1,12 +1,12 @@
-import { Component, Input } from "@angular/core";
-import { FormArray, FormGroup } from "@angular/forms";
+import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: "ap-content-form",
-  templateUrl: "./content-form.component.html",
-  styleUrls: ["./content-form.component.scss"],
+  selector: 'ngx-content-form',
+  templateUrl: './content-form.component.html',
+  styleUrls: ['./content-form.component.scss'],
 })
-export class ContentFormComponent {
+export class ContentFormComponent implements OnInit {
   @Input() public form: FormGroup;
 
   get meta(): FormGroup {

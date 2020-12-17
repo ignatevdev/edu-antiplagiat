@@ -1,12 +1,12 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { LocalDataSource } from "ng2-smart-table";
-import { map } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { LocalDataSource } from 'ng2-smart-table';
+import { map } from 'rxjs/operators';
 
-import { format as formatUrl } from "url";
-import { ParsedUrlQuery } from "querystring";
+import { format as formatUrl } from 'url';
+import { ParsedUrlQuery } from 'querystring';
 
-import { environment } from "./../../../../environments/environment";
+import { environment } from './../../../../environments/environment';
 
 interface ListResponseBody {
   data: any[];
@@ -33,12 +33,12 @@ export class UsersDataSource extends LocalDataSource {
     });
 
     return this.http
-      .get(formattedUrl, { observe: "response" })
+      .get(formattedUrl, { observe: 'response' })
       .pipe(
-        map((res) => {
-          this.lastRequestCount = +res.headers.get("x-total-count");
+        map(res => {
+          this.lastRequestCount = +res.headers.get('x-total-count');
           return res.body;
-        })
+        }),
       )
       .toPromise()
       .then((c: any) => {
@@ -49,16 +49,16 @@ export class UsersDataSource extends LocalDataSource {
   add(element) {
     const formattedUrl = formatUrl({
       ...environment.api,
-      pathname: "/admin/users",
+      pathname: '/admin/users',
     });
 
     return this.http
-      .post(formattedUrl, element, { observe: "response" })
+      .post(formattedUrl, element, { observe: 'response' })
       .pipe(
-        map((res) => {
-          this.lastRequestCount = +res.headers.get("x-total-count");
+        map(res => {
+          this.lastRequestCount = +res.headers.get('x-total-count');
           return res.body;
-        })
+        }),
       )
       .toPromise();
   }
@@ -70,12 +70,12 @@ export class UsersDataSource extends LocalDataSource {
     });
 
     return this.http
-      .patch(formattedUrl, element, { observe: "response" })
+      .patch(formattedUrl, element, { observe: 'response' })
       .pipe(
-        map((res) => {
-          this.lastRequestCount = +res.headers.get("x-total-count");
+        map(res => {
+          this.lastRequestCount = +res.headers.get('x-total-count');
           return res.body;
-        })
+        }),
       )
       .toPromise();
   }
@@ -83,20 +83,20 @@ export class UsersDataSource extends LocalDataSource {
   public suggest(q) {
     const formattedUrl = formatUrl({
       ...environment.api,
-      pathname: "/admin/users/suggest",
+      pathname: '/admin/users/suggest',
       query: {
         q,
         perPage: 10,
       },
     });
 
-    return this.http.get(formattedUrl, { observe: "response" }).pipe(
-      map((res) => {
-        this.lastRequestCount = +res.headers.get("x-total-count");
+    return this.http.get(formattedUrl, { observe: 'response' }).pipe(
+      map(res => {
+        this.lastRequestCount = +res.headers.get('x-total-count');
         const body = res.body as ListResponseBody;
 
         return body.data;
-      })
+      }),
     );
   }
 
@@ -105,26 +105,26 @@ export class UsersDataSource extends LocalDataSource {
 
     if (
       this.pagingConf &&
-      this.pagingConf["page"] &&
-      this.pagingConf["perPage"]
+      this.pagingConf['page'] &&
+      this.pagingConf['perPage']
     ) {
-      query.page = this.pagingConf["page"];
-      query.perPage = this.pagingConf["perPage"];
+      query.page = this.pagingConf['page'];
+      query.perPage = this.pagingConf['perPage'];
     }
 
     const formattedUrl = formatUrl({
       ...environment.api,
-      pathname: "/admin/users",
+      pathname: '/admin/users',
       query,
     });
 
     return this.http
-      .get(formattedUrl, { observe: "response" })
+      .get(formattedUrl, { observe: 'response' })
       .pipe(
-        map((res) => {
-          this.lastRequestCount = +res.headers.get("x-total-count");
+        map(res => {
+          this.lastRequestCount = +res.headers.get('x-total-count');
           return res.body;
-        })
+        }),
       )
       .toPromise()
       .then((c: ListResponseBody) => {

@@ -11,7 +11,7 @@
 export const environment = {
   production: false,
   api: {
-    protocol: "http",
-    host: "localhost:8001",
+    protocol: 'http',
+    host: 'localhost:8001',
   },
 };

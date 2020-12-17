@@ -1,32 +1,32 @@
-import { Component } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { NbDialogService } from "@nebular/theme";
+import { NbDialogService } from '@nebular/theme';
 
-import { ContentDataSource } from "../utils/content-data-source";
-import { subjectNames } from "../utils/constants";
+import { ContentDataSource } from '../utils/content-data-source';
+import { subjectNames } from '../utils/constants';
 
-import { SourceLinkComponent } from "./source-link/source-link.component";
+import { SourceLinkComponent } from './source-link/source-link.component';
 
-import { DeleteConfirmationDialog } from "./delete-confirmation-dialog/delete-confirmation-dialog.component";
-import { TextFilterComponent } from "./text-filter/text-filter.component";
-import { ContentCellComponent } from "./content-cell/content-cell.component";
-import { SourcesDataSource } from "../../utils/sources-data-source";
+import { DeleteConfirmationDialogComponent } from './delete-confirmation-dialog/delete-confirmation-dialog.component';
+import { TextFilterComponent } from './text-filter/text-filter.component';
+import { ContentCellComponent } from './content-cell/content-cell.component';
+import { SourcesDataSource } from '../../utils/sources-data-source';
 
 @Component({
-  selector: "ap-content-list",
-  templateUrl: "./content-list.component.html",
-  styleUrls: ["./content-list.component.scss"],
+  selector: 'ngx-content-list',
+  templateUrl: './content-list.component.html',
+  styleUrls: ['./content-list.component.scss'],
 })
-export class ContentListComponent {
+export class ContentListComponent implements OnInit {
   constructor(
     http: HttpClient,
     private dialogService: NbDialogService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {
-    const sourceId = this.activatedRoute.snapshot.paramMap.get("sourceId");
+    const sourceId = this.activatedRoute.snapshot.paramMap.get('sourceId');
 
     this.sourceId = sourceId;
 
@@ -42,58 +42,58 @@ export class ContentListComponent {
 
   settings: any = {
     actions: {
-      columnTitle: "Действия",
+      columnTitle: 'Действия',
       add: false,
-      position: "right",
+      position: 'right',
     },
 
     edit: {
-      editButtonContent: "Редактировать",
+      editButtonContent: 'Редактировать',
     },
     delete: {
-      deleteButtonContent: "Удалить",
+      deleteButtonContent: 'Удалить',
     },
     sort: false,
-    mode: "external",
+    mode: 'external',
     columns: {
       content: {
-        title: "Содержимое",
+        title: 'Содержимое',
         sort: false,
-        type: "custom",
+        type: 'custom',
         renderComponent: ContentCellComponent,
         filter: {
-          type: "custom",
+          type: 'custom',
           component: TextFilterComponent,
         },
       },
       paragraph: {
-        title: "Параграф",
+        title: 'Параграф',
         sort: false,
         filter: {
-          type: "custom",
+          type: 'custom',
           component: TextFilterComponent,
         },
       },
       page_num: {
-        title: "Страница",
+        title: 'Страница',
         sort: false,
         filter: {
-          type: "custom",
+          type: 'custom',
           component: TextFilterComponent,
         },
       },
       task_num: {
-        title: "№ задания",
+        title: '№ задания',
         sort: false,
         filter: {
-          type: "custom",
+          type: 'custom',
           component: TextFilterComponent,
         },
       },
       link: {
-        title: "Ссылка",
+        title: 'Ссылка',
         sort: false,
-        type: "custom",
+        type: 'custom',
         renderComponent: SourceLinkComponent,
         filter: false,
       },
@@ -101,11 +101,11 @@ export class ContentListComponent {
   };
 
   get authors() {
-    return this.source.authors.map((item) => item.name).join(", ");
+    return this.source.authors.map(item => item.name).join(', ');
   }
 
   ngOnInit() {
-    this.sourcesDataSource.find({ id: this.sourceId }).then((content) => {
+    this.sourcesDataSource.find({ id: this.sourceId }).then(content => {
       this.source = content;
     });
   }
@@ -114,13 +114,13 @@ export class ContentListComponent {
     this.dataSource.reset();
   };
 
-  onEdit = (e) => {
+  onEdit = e => {
     this.router.navigateByUrl(
-      `/pages/sources/view/${this.sourceId}/content/edit/${e.data.id}`
+      `/pages/sources/view/${this.sourceId}/content/edit/${e.data.id}`,
     );
   };
 
-  onDelete = (e) => {
+  onDelete = e => {
     const { id } = e.data;
 
     const onDelete = async () => {
@@ -131,7 +131,7 @@ export class ContentListComponent {
       this.source.load(data);
     };
 
-    this.dialogService.open(DeleteConfirmationDialog, {
+    this.dialogService.open(DeleteConfirmationDialogComponent, {
       context: {
         onDelete,
       },

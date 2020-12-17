@@ -1,8 +1,8 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 @Component({
-  selector: "ngx-two-columns-layout",
-  styleUrls: ["./two-columns.layout.scss"],
+  selector: 'ngx-two-columns-layout',
+  styleUrls: ['./two-columns.layout.scss'],
   template: `
     <nb-layout windowMode>
       <nb-layout-header fixed>

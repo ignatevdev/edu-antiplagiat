@@ -4,30 +4,30 @@ import {
   OnInit,
   OnChanges,
   SimpleChanges,
-} from "@angular/core";
+} from '@angular/core';
 
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
 import {
   debounceTime,
   map,
   mergeMap,
   filter,
   distinctUntilChanged,
-} from "rxjs/operators";
+} from 'rxjs/operators';
 
-import { DefaultFilter } from "ng2-smart-table";
+import { DefaultFilter } from 'ng2-smart-table';
 
-import { HttpClient } from "@angular/common/http";
-import { Column } from "ng2-smart-table/lib/lib/data-set/column";
-import { FormControl } from "@angular/forms";
-import { tap } from "ramda";
-import { SourcesDataSource } from "../../utils/sources-data-source";
-import { CatalogsDataSource } from "app/pages/catalogs/utils/catalogs-data-source";
+import { HttpClient } from '@angular/common/http';
+import { Column } from 'ng2-smart-table/lib/lib/data-set/column';
+import { FormControl } from '@angular/forms';
+import { tap } from 'ramda';
+import { SourcesDataSource } from '../../utils/sources-data-source';
+import { CatalogsDataSource } from 'app/pages/catalogs/utils/catalogs-data-source';
 
 @Component({
-  templateUrl: "./publisher-filter.component.html",
+  templateUrl: './publisher-filter.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ["./publisher-filter.component.scss"],
+  styleUrls: ['./publisher-filter.component.scss'],
 })
 export class PublisherFilterComponent
   extends DefaultFilter
@@ -35,7 +35,7 @@ export class PublisherFilterComponent
   constructor(private http: HttpClient) {
     super();
 
-    this.catalogsSource = new CatalogsDataSource(this.http, "publishers");
+    this.catalogsSource = new CatalogsDataSource(this.http, 'publishers');
   }
 
   query: string;
@@ -55,32 +55,32 @@ export class PublisherFilterComponent
       tap(() => {
         this.query = null;
         this.setFilter();
-      })
+      }),
     );
 
     this.filteredOptions$ = this.inputControl.valueChanges
       .pipe(distinctUntilChanged(), debounceTime(this.delay))
-      .pipe(filter((val) => !!val))
-      .pipe(mergeMap((value) => this.getFilteredOptions(value)));
+      .pipe(filter(val => !!val))
+      .pipe(mergeMap(value => this.getFilteredOptions(value)));
   }
 
   ngOnChanges(changes: SimpleChanges) {
     this.query = changes.query.currentValue;
 
     if (!this.query) {
-      this.inputControl.setValue("");
+      this.inputControl.setValue('');
     }
   }
 
   getFilteredOptions(value: string): Observable<string[]> {
     return this.catalogsSource.suggest(value).pipe(
-      map((data) => {
-        data.forEach((item) => {
+      map(data => {
+        data.forEach(item => {
           this.publisherIdByName[item.name] = item.id;
         });
 
-        return data.map((item) => item.name);
-      })
+        return data.map(item => item.name);
+      }),
     );
   }
 

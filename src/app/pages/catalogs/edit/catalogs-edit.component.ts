@@ -1,22 +1,22 @@
-import { HttpClient } from "@angular/common/http";
-import { Component } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { CatalogsDataSource } from "../utils/catalogs-data-source";
+import { CatalogsDataSource } from '../utils/catalogs-data-source';
 
 @Component({
-  selector: "ap-catalogs-edit",
-  templateUrl: "./catalogs-edit.component.html",
-  styleUrls: ["./catalogs-edit.component.scss"],
+  selector: 'ngx-catalogs-edit',
+  templateUrl: './catalogs-edit.component.html',
+  styleUrls: ['./catalogs-edit.component.scss'],
 })
-export class CatalogsEditComponent {
+export class CatalogsEditComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {
-    const catalog = this.activatedRoute.snapshot.paramMap.get("catalog");
+    const catalog = this.activatedRoute.snapshot.paramMap.get('catalog');
 
     this.catalog = catalog;
 
@@ -26,7 +26,7 @@ export class CatalogsEditComponent {
   catalog: string;
 
   form = new FormGroup({
-    name: new FormControl("", [Validators.required]),
+    name: new FormControl('', [Validators.required]),
   });
 
   element: any;
@@ -34,9 +34,9 @@ export class CatalogsEditComponent {
   source: CatalogsDataSource;
 
   ngOnInit() {
-    const id = this.activatedRoute.snapshot.paramMap.get("id");
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
 
-    this.source.find({ id, catalog: this.catalog }).then((element) => {
+    this.source.find({ id, catalog: this.catalog }).then(element => {
       this.element = element;
 
       this.form.setValue({

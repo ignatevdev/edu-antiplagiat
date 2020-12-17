@@ -1,21 +1,21 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from "@angular/core";
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
-import { Subscription } from "rxjs";
+import { Subscription } from 'rxjs';
 
-import { FormControl } from "@angular/forms";
-import { Column } from "ng2-smart-table/lib/lib/data-set/column";
+import { FormControl } from '@angular/forms';
+import { Column } from 'ng2-smart-table/lib/lib/data-set/column';
 
-import { ContentDataSource } from "../../utils/content-data-source";
-import { DefaultFilter } from "ng2-smart-table";
-import { debounceTime, distinctUntilChanged } from "rxjs/operators";
+import { ContentDataSource } from '../../utils/content-data-source';
+import { DefaultFilter } from 'ng2-smart-table';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
-  templateUrl: "./text-filter.component.html",
+  templateUrl: './text-filter.component.html',
 })
 export class TextFilterComponent
   extends DefaultFilter
   implements OnInit, OnChanges {
-  query: string = "";
+  query: string = '';
 
   source: ContentDataSource;
   column: Column;
@@ -25,12 +25,12 @@ export class TextFilterComponent
   inputControl = new FormControl();
 
   ngOnInit() {
-    this.type = this.column.id === "page_num" ? "number" : "text";
+    this.type = this.column.id === 'page_num' ? 'number' : 'text';
 
     this.inputControl.valueChanges
       .pipe(distinctUntilChanged(), debounceTime(this.delay))
       .subscribe((value: number) => {
-        this.query = value !== null ? this.inputControl.value.toString() : "";
+        this.query = value !== null ? this.inputControl.value.toString() : '';
         this.setFilter();
       });
   }

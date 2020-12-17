@@ -1,13 +1,13 @@
-import { CommonModule } from "@angular/common";
-import { NgModule } from "@angular/core";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   NbAutocompleteModule,
   NbIconModule,
   NbInputModule,
-} from "@nebular/theme";
+} from '@nebular/theme';
 
-import { PublisherFilterComponent } from "./publisher-filter.component";
+import { PublisherFilterComponent } from './publisher-filter.component';
 
 @NgModule({
   imports: [

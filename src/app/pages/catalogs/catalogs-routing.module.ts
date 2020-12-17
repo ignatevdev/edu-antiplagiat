@@ -1,29 +1,29 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
-import { CatalogsListComponent } from "./list/catalogs-list.component";
-import { CatalogsCreateComponent } from "./create/catalogs-create.component";
-import { CatalogsEditComponent } from "./edit/catalogs-edit.component";
+import { CatalogsListComponent } from './list/catalogs-list.component';
+import { CatalogsCreateComponent } from './create/catalogs-create.component';
+import { CatalogsEditComponent } from './edit/catalogs-edit.component';
 
-import { catalogs } from "./utils/constants";
+import { catalogs } from './utils/constants';
 
 const routes: Routes = [
   {
-    path: ":catalog",
+    path: ':catalog',
     component: CatalogsListComponent,
   },
   {
-    path: ":catalog/create",
+    path: ':catalog/create',
     component: CatalogsCreateComponent,
   },
   {
-    path: ":catalog/edit/:id",
+    path: ':catalog/edit/:id',
     component: CatalogsEditComponent,
   },
   {
-    path: "",
+    path: '',
     redirectTo: `/pages/catalogs/${catalogs[0]}`,
-    pathMatch: "full",
+    pathMatch: 'full',
   },
 ];
 

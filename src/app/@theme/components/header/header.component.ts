@@ -1,22 +1,22 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   NbMediaBreakpointsService,
   NbMenuService,
   NbSidebarService,
   NbThemeService,
-} from "@nebular/theme";
+} from '@nebular/theme';
 
-import { LayoutService } from "../../../@core/utils";
-import { AuthGuard } from "../../../auth-guard.service";
-import { map, filter, takeUntil } from "rxjs/operators";
-import { Subject } from "rxjs";
-import { NbAuthService, NbTokenService } from "@nebular/auth";
-import { Router } from "@angular/router";
+import { LayoutService } from '../../../@core/utils';
+import { AuthGuard } from '../../../auth-guard.service';
+import { map, filter, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { NbAuthService, NbTokenService } from '@nebular/auth';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: "ngx-header",
-  styleUrls: ["./header.component.scss"],
-  templateUrl: "./header.component.html",
+  selector: 'ngx-header',
+  styleUrls: ['./header.component.scss'],
+  templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
@@ -25,19 +25,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   userMenu = [
     {
-      title: "Профиль",
+      title: 'Профиль',
       data: {
-        action: "profile",
+        action: 'profile',
       },
     },
     {
-      title: "Выйти",
+      title: 'Выйти',
       data: {
-        action: "logout",
+        action: 'logout',
       },
     },
   ];
-  userbarTag = "user-bar-menu";
+  userbarTag = 'user-bar-menu';
 
   constructor(
     private sidebarService: NbSidebarService,
@@ -47,7 +47,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private breakpointService: NbMediaBreakpointsService,
     private authGuard: AuthGuard,
     private nbTokenService: NbTokenService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -59,30 +59,30 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .onMediaQueryChange()
       .pipe(
         map(([, currentBreakpoint]) => currentBreakpoint.width < xl),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe(
-        (isLessThanXl: boolean) => (this.userPictureOnly = isLessThanXl)
+        (isLessThanXl: boolean) => (this.userPictureOnly = isLessThanXl),
       );
 
     this.menuService
       .onItemClick()
       .pipe(
         filter(({ tag }) => tag === this.userbarTag),
-        map(({ item: { data } }) => data.action)
+        map(({ item: { data } }) => data.action),
       )
-      .subscribe((action) => {
+      .subscribe(action => {
         switch (action) {
-          case "profile": {
-            this.router.navigateByUrl("/pages/profile");
+          case 'profile': {
+            this.router.navigateByUrl('/pages/profile');
 
             return;
           }
 
-          case "logout": {
+          case 'logout': {
             this.nbTokenService.clear();
 
-            this.router.navigateByUrl("/auth/login");
+            this.router.navigateByUrl('/auth/login');
 
             return;
           }
@@ -99,7 +99,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   toggleSidebar(): boolean {
-    this.sidebarService.toggle(true, "menu-sidebar");
+    this.sidebarService.toggle(true, 'menu-sidebar');
     this.layoutService.changeLayoutSize();
 
     return false;

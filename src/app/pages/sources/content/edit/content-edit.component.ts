@@ -1,22 +1,22 @@
-import { HttpClient } from "@angular/common/http";
-import { Component } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { ContentDataSource } from "../utils/content-data-source";
+import { ContentDataSource } from '../utils/content-data-source';
 
 @Component({
-  selector: "ap-content-edit",
-  templateUrl: "./content-edit.component.html",
-  styleUrls: ["./content-edit.component.scss"],
+  selector: 'ngx-content-edit',
+  templateUrl: './content-edit.component.html',
+  styleUrls: ['./content-edit.component.scss'],
 })
-export class ContentEditComponent {
+export class ContentEditComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {
-    const sourceId = this.activatedRoute.snapshot.paramMap.get("sourceId");
+    const sourceId = this.activatedRoute.snapshot.paramMap.get('sourceId');
 
     this.sourceId = sourceId;
 
@@ -26,11 +26,11 @@ export class ContentEditComponent {
   sourceId: string;
 
   form = new FormGroup({
-    content: new FormControl("", [Validators.required]),
-    page_num: new FormControl("", []),
-    paragraph: new FormControl("", []),
-    task_num: new FormControl("", []),
-    link: new FormControl("", []),
+    content: new FormControl('', [Validators.required]),
+    page_num: new FormControl('', []),
+    paragraph: new FormControl('', []),
+    task_num: new FormControl('', []),
+    link: new FormControl('', []),
   });
 
   content: any;
@@ -38,9 +38,9 @@ export class ContentEditComponent {
   source: ContentDataSource;
 
   ngOnInit() {
-    const id = this.activatedRoute.snapshot.paramMap.get("contentId");
+    const id = this.activatedRoute.snapshot.paramMap.get('contentId');
 
-    this.source.find({ id }).then((content) => {
+    this.source.find({ id }).then(content => {
       this.content = content;
 
       this.form.setValue({
@@ -63,7 +63,7 @@ export class ContentEditComponent {
 
       this.source.update(values).then((data: any) => {
         this.router.navigateByUrl(
-          `/pages/sources/view/${this.content.source_id}`
+          `/pages/sources/view/${this.content.source_id}`,
         );
       });
     }

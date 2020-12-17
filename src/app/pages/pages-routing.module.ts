@@ -1,51 +1,51 @@
-import { RouterModule, Routes } from "@angular/router";
-import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
 
-import { PagesComponent } from "./pages.component";
-import { NotFoundComponent } from "./not-found/not-found.component";
-import { ProfileComponent } from "./profile/profile.component";
-import { MatchingComponent } from "./matching/matching.component";
+import { PagesComponent } from './pages.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { ProfileComponent } from './profile/profile.component';
+import { MatchingComponent } from './matching/matching.component';
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: PagesComponent,
     children: [
       {
-        path: "catalogs",
+        path: 'catalogs',
         loadChildren: () =>
-          import("./catalogs/catalogs.module").then((m) => m.CatalogsModule),
+          import('./catalogs/catalogs.module').then(m => m.CatalogsModule),
       },
       {
-        path: "sources",
+        path: 'sources',
         loadChildren: () =>
-          import("./sources/sources.module").then((m) => m.SourcesModule),
+          import('./sources/sources.module').then(m => m.SourcesModule),
       },
       {
-        path: "users",
+        path: 'users',
         loadChildren: () =>
-          import("./users/users.module").then((m) => m.UsersModule),
+          import('./users/users.module').then(m => m.UsersModule),
       },
       {
-        path: "tokens",
+        path: 'tokens',
         loadChildren: () =>
-          import("./tokens/tokens.module").then((m) => m.TokensModule),
+          import('./tokens/tokens.module').then(m => m.TokensModule),
       },
       {
-        path: "profile",
+        path: 'profile',
         component: ProfileComponent,
       },
       {
-        path: "matching",
+        path: 'matching',
         component: MatchingComponent,
       },
       {
-        path: "",
-        redirectTo: "content",
-        pathMatch: "full",
+        path: '',
+        redirectTo: 'content',
+        pathMatch: 'full',
       },
       {
-        path: "**",
+        path: '**',
         component: NotFoundComponent,
       },
     ],

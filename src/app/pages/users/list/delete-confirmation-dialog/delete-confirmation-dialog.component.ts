@@ -1,22 +1,20 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
-import { NbDialogRef } from "@nebular/theme";
+import { NbDialogRef } from '@nebular/theme';
 
 @Component({
-  selector: "ap-delete-confirmation-dialog",
-  templateUrl: "./delete-confirmation-dialog.component.html",
-  styleUrls: ["./delete-confirmation-dialog.component.scss"],
+  selector: 'ngx-delete-confirmation-dialog',
+  templateUrl: './delete-confirmation-dialog.component.html',
+  styleUrls: ['./delete-confirmation-dialog.component.scss'],
 })
-export class DeleteConfirmationDialog {
-  constructor(protected ref: NbDialogRef<DeleteConfirmationDialog>) {}
+export class DeleteConfirmationDialogComponent {
+  constructor(protected ref: NbDialogRef<DeleteConfirmationDialogComponent>) {}
 
   name: string;
 
   onDelete: () => void;
 
   cancel() {
-    console.log("cancel");
-
     this.ref.close();
   }
 

@@ -1,26 +1,26 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
-import { UsersComponent } from "./users.component";
-import { UsersListComponent } from "./list/users-list.component";
-import { UsersCreateComponent } from "./create/users-create.component";
-import { UsersEditComponent } from "./edit/users-edit.component";
+import { UsersComponent } from './users.component';
+import { UsersListComponent } from './list/users-list.component';
+import { UsersCreateComponent } from './create/users-create.component';
+import { UsersEditComponent } from './edit/users-edit.component';
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: UsersComponent,
     children: [
       {
-        path: "",
+        path: '',
         component: UsersListComponent,
       },
       {
-        path: "create",
+        path: 'create',
         component: UsersCreateComponent,
       },
       {
-        path: "edit/:id",
+        path: 'edit/:id',
         component: UsersEditComponent,
       },
     ],

@@ -8,27 +8,27 @@ import {
   ChangeDetectorRef,
   Component,
   Inject,
-} from "@angular/core";
-import { Router } from "@angular/router";
+} from '@angular/core';
+import { Router } from '@angular/router';
 import {
   NbAuthResult,
   NbAuthService,
   NB_AUTH_OPTIONS,
   NbTokenService,
-} from "@nebular/auth";
+} from '@nebular/auth';
 
-import { path } from "ramda";
+import { path } from 'ramda';
 
 @Component({
-  selector: "nb-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"],
+  selector: 'ngx-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class LoginComponent {
   redirectDelay: number = 0;
   showMessages: any = {};
-  strategy: string = "";
+  strategy: string = '';
 
   errors: string[] = [];
   messages: string[] = [];
@@ -41,12 +41,12 @@ export class LoginComponent {
     @Inject(NB_AUTH_OPTIONS) protected options = {},
     protected cd: ChangeDetectorRef,
     protected router: Router,
-    protected tokenService: NbTokenService
+    protected tokenService: NbTokenService,
   ) {
-    this.redirectDelay = this.getConfigValue("forms.login.redirectDelay");
-    this.showMessages = this.getConfigValue("forms.login.showMessages");
-    this.strategy = this.getConfigValue("forms.login.strategy");
-    this.rememberMe = this.getConfigValue("forms.login.rememberMe");
+    this.redirectDelay = this.getConfigValue('forms.login.redirectDelay');
+    this.showMessages = this.getConfigValue('forms.login.showMessages');
+    this.strategy = this.getConfigValue('forms.login.strategy');
+    this.rememberMe = this.getConfigValue('forms.login.rememberMe');
   }
 
   login(): void {
@@ -78,6 +78,6 @@ export class LoginComponent {
   }
 
   getConfigValue(key: string): any {
-    return path(key.split("."), this.options);
+    return path(key.split('.'), this.options);
   }
 }

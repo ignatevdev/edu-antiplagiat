@@ -1,7 +1,7 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 @Component({
-  selector: "ap-tokens",
+  selector: 'ngx-tokens',
   template: ` <router-outlet></router-outlet> `,
 })
 export class TokensComponent {}

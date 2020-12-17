@@ -1,14 +1,14 @@
-import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, CanActivate, Router } from "@angular/router";
-import { NbAuthService, NbAuthSimpleToken } from "@nebular/auth";
-import { HttpClient } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
+import { NbAuthService, NbAuthSimpleToken } from '@nebular/auth';
+import { HttpClient } from '@angular/common/http';
 
-import { format as formatUrl } from "url";
-import { Observable, BehaviorSubject, of, merge } from "rxjs";
-import { catchError, filter, tap, map, switchMap } from "rxjs/operators";
-import { reduceTicks } from "@swimlane/ngx-charts";
+import { format as formatUrl } from 'url';
+import { Observable, BehaviorSubject, of, merge } from 'rxjs';
+import { catchError, filter, tap, map, switchMap } from 'rxjs/operators';
+import { reduceTicks } from '@swimlane/ngx-charts';
 
-import { environment } from "./../environments/environment";
+import { environment } from './../environments/environment';
 
 interface User {
   email: string;
@@ -30,7 +30,7 @@ export class AuthGuard implements CanActivate {
   constructor(
     private authService: NbAuthService,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
   ) {
     this.authService
       .onTokenChange()
@@ -46,15 +46,15 @@ export class AuthGuard implements CanActivate {
         }),
         catchError(() => {
           return of(null);
-        })
+        }),
       )
       .pipe(
-        tap((user) => {
+        tap(user => {
           this.state.next({
             authAttempted: true,
             user,
           });
-        })
+        }),
       )
       .subscribe();
   }
@@ -65,17 +65,13 @@ export class AuthGuard implements CanActivate {
   });
 
   canActivate(route: ActivatedRouteSnapshot) {
-    console.log("here");
-
     const { authorizedOnly, unauthorizedOnly } = route.data;
 
-    const loginRedirect = this.router.parseUrl("/auth/login");
-    const homeRedirect = this.router.parseUrl("/");
+    const loginRedirect = this.router.parseUrl('/auth/login');
+    const homeRedirect = this.router.parseUrl('/');
 
-    return this.state.pipe(filter((state) => state.authAttempted)).pipe(
+    return this.state.pipe(filter(state => state.authAttempted)).pipe(
       map(({ user }) => {
-        console.log("got event", { user, authorizedOnly, unauthorizedOnly });
-
         if (authorizedOnly && !user) {
           return loginRedirect;
         }
@@ -85,7 +81,7 @@ export class AuthGuard implements CanActivate {
         }
 
         return true;
-      })
+      }),
     );
   }
 
@@ -96,7 +92,7 @@ export class AuthGuard implements CanActivate {
   loadUser() {
     const formattedUrl = formatUrl({
       ...environment.api,
-      pathname: "/lk/profile",
+      pathname: '/lk/profile',
     });
 
     return this.http.get(formattedUrl).pipe(
@@ -104,14 +100,14 @@ export class AuthGuard implements CanActivate {
         const user = payload.data;
 
         return user;
-      })
+      }),
     );
   }
 
   updateUser(data) {
     const formattedUrl = formatUrl({
       ...environment.api,
-      pathname: "/lk/profile",
+      pathname: '/lk/profile',
     });
 
     return this.http.patch(formattedUrl, data).pipe(
@@ -122,7 +118,7 @@ export class AuthGuard implements CanActivate {
           ...this.state.getValue(),
           user,
         });
-      })
+      }),
     );
   }
 }

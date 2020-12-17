@@ -1,32 +1,32 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
-import { SourcesComponent } from "./sources.component";
-import { SourcesListComponent } from "./list/sources-list.component";
-import { SourcesCreateComponent } from "./create/sources-create.component";
-import { SourcesEditComponent } from "./edit/sources-edit.component";
+import { SourcesComponent } from './sources.component';
+import { SourcesListComponent } from './list/sources-list.component';
+import { SourcesCreateComponent } from './create/sources-create.component';
+import { SourcesEditComponent } from './edit/sources-edit.component';
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: SourcesComponent,
     children: [
       {
-        path: "",
+        path: '',
         component: SourcesListComponent,
       },
       {
-        path: "create",
+        path: 'create',
         component: SourcesCreateComponent,
       },
       {
-        path: "edit/:id",
+        path: 'edit/:id',
         component: SourcesEditComponent,
       },
       {
-        path: "view/:sourceId",
+        path: 'view/:sourceId',
         loadChildren: () =>
-          import("./content/content.module").then((m) => m.ContentModule),
+          import('./content/content.module').then(m => m.ContentModule),
       },
     ],
   },

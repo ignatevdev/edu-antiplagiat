@@ -1,74 +1,73 @@
-import { Component } from "@angular/core";
-import { DatePipe } from "@angular/common";
-import { HttpClient } from "@angular/common/http";
+import { Component } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
-import { NbDialogService } from "@nebular/theme";
+import { NbDialogService } from '@nebular/theme';
 
-import { UsersDataSource } from "../utils/users-data-source";
+import { UsersDataSource } from '../utils/users-data-source';
 
-import { DeleteConfirmationDialog } from "./delete-confirmation-dialog/delete-confirmation-dialog.component";
-import { PermissionsColumn } from "./permissions-column/permissions-column.component";
-import { Router } from "@angular/router";
+import { DeleteConfirmationDialogComponent } from './delete-confirmation-dialog/delete-confirmation-dialog.component';
+import { PermissionsColumnComponent } from './permissions-column/permissions-column.component';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: "ap-users-list",
-  templateUrl: "./users-list.component.html",
-  styleUrls: ["./users-list.component.scss"],
+  selector: 'ngx-users-list',
+  templateUrl: './users-list.component.html',
+  styleUrls: ['./users-list.component.scss'],
 })
 export class UsersListComponent {
   constructor(
     http: HttpClient,
     private datePipe: DatePipe,
     private dialogService: NbDialogService,
-    private router: Router
+    private router: Router,
   ) {
     this.source = new UsersDataSource(http);
   }
 
   settings: any = {
     actions: {
-      columnTitle: "Действия",
+      columnTitle: 'Действия',
       add: false,
       delete: false,
-      position: "right",
+      position: 'right',
     },
 
     edit: {
-      editButtonContent: "Редактировать",
+      editButtonContent: 'Редактировать',
     },
     delete: {
-      deleteButtonContent: "Удалить",
+      deleteButtonContent: 'Удалить',
     },
 
     hideSubHeader: true,
     sort: false,
-    mode: "external",
+    mode: 'external',
     columns: {
       first_name: {
-        title: "Имя",
+        title: 'Имя',
         sort: false,
       },
       last_name: {
-        title: "Фамилия",
+        title: 'Фамилия',
         sort: false,
       },
       email: {
-        title: "Email",
+        title: 'Email',
         sort: false,
       },
       permissions: {
-        title: "Права",
-        type: "custom",
-        renderComponent: PermissionsColumn,
+        title: 'Права',
+        type: 'custom',
+        renderComponent: PermissionsColumnComponent,
         sort: false,
       },
       created_at: {
-        title: "Дата добавления",
-        valuePrepareFunction: (date) => {
-          var raw = new Date(date);
+        title: 'Дата добавления',
+        valuePrepareFunction: date => {
+          const raw = new Date(date);
 
-          var formatted = this.datePipe.transform(raw, "dd.MM.yyyy");
-          return formatted;
+          return this.datePipe.transform(raw, 'dd.MM.yyyy');
         },
         sort: false,
       },
@@ -77,22 +76,20 @@ export class UsersListComponent {
 
   source: UsersDataSource;
 
-  onEdit = (e) => {
+  onEdit = e => {
     this.router.navigateByUrl(`/pages/users/edit/${e.data.id}`);
   };
 
-  onDelete = (e) => {
+  onDelete = e => {
     const { first_name, last_name, email } = e.data;
 
     const names = [first_name, last_name].filter(Boolean);
 
-    const name = names.length ? names.join(" ") : email;
+    const name = names.length ? names.join(' ') : email;
 
-    const onDelete = () => {
-      console.log("make delete");
-    };
+    const onDelete = () => {};
 
-    this.dialogService.open(DeleteConfirmationDialog, {
+    this.dialogService.open(DeleteConfirmationDialogComponent, {
       context: {
         name,
         onDelete,
