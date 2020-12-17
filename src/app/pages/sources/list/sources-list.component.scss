@@ -1,0 +1,30 @@
+@import "../../../@theme/styles/themes";
+
+@include nb-install-component() {
+  nb-card {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+nb-card-header {
+  display: flex;
+  align-items: center;
+
+  input {
+    margin-left: auto;
+  }
+
+  button {
+    margin: 0 10px;
+  }
+}
+
+:host ::ng-deep ng2-smart-table .ng2-smart-actions a.ng2-smart-action {
+  font-size: 0.9375rem !important;
+  font-weight: 400 !important;
+  line-height: 1.25rem !important;
+}
+
+.create {
+  float: right;
+}

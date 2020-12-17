@@ -1,0 +1,20 @@
+<div [formGroup]="form">
+  <div class="row">
+    <div class="col-lg-12">
+      <label class="label" for="catalog-name-input">Название</label>
+      <input
+        class="name"
+        nbInput
+        id="catalog-name-input"
+        formControlName="name"
+        fullWidth
+        [status]="
+          (form.controls.name.invalid && form.touched) ||
+          (form.controls.name.invalid && form.controls.name.touched)
+            ? 'danger'
+            : 'basic'
+        "
+      />
+    </div>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+<nb-card>
+  <nb-card-header class="source">
+    <div>
+      <h3>
+        {{ source.name }}
+      </h3>
+
+      <a *ngIf="!!source.link" [href]="source.link" target="_blank">Ссылка</a>
+    </div>
+
+    <table class="info">
+      <tbody>
+        <tr *ngIf="!!source.publisher">
+          <td>Издательство</td>
+          <td>
+            {{ source.publisher.name }}
+          </td>
+        </tr>
+        <tr *ngIf="!!source.publish_year">
+          <td>Год</td>
+          <td>
+            {{ source.publish_year }}
+          </td>
+        </tr>
+        <tr *ngIf="!!source.publish_num">
+          <td>Издание</td>
+          <td>
+            {{ source.publish_num }}
+          </td>
+        </tr>
+        <tr *ngIf="!!source.isbn">
+          <td>ISBN</td>
+          <td>
+            {{ source.isbn }}
+          </td>
+        </tr>
+        <tr *ngIf="source.authors && source.authors.length > 0">
+          <td>Авторы</td>
+          <td>
+            {{ authors }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </nb-card-header>
+
+  <nb-card-header class="content-header">
+    <h6>Список контента источника</h6>
+
+    <div class="actions">
+      <button
+        nbButton
+        status="secondary"
+        class="reset"
+        (click)="resetFilters()"
+      >
+        Сбросить фильтры
+      </button>
+
+      <a [routerLink]="['/pages/sources/view', sourceId, 'content', 'create']">
+        <button nbButton status="primary" class="create">Добавить</button>
+      </a>
+    </div>
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table
+      [settings]="settings"
+      [source]="dataSource"
+      (edit)="onEdit($event)"
+      (delete)="onDelete($event)"
+    >
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

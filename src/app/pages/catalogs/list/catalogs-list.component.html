@@ -1,0 +1,30 @@
+<nb-card>
+  <nb-card-header>
+    {{ catalogNames[catalog] }}
+
+    <div class="actions">
+      <button
+        nbButton
+        status="secondary"
+        class="reset"
+        (click)="resetFilters()"
+      >
+        Сбросить фильтры
+      </button>
+
+      <a [routerLink]="['/pages/catalogs', catalog, 'create']">
+        <button nbButton status="primary" class="create">Добавить</button>
+      </a>
+    </div>
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table
+      [settings]="settings"
+      [source]="source"
+      (edit)="onEdit($event)"
+      (delete)="onDelete($event)"
+    >
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

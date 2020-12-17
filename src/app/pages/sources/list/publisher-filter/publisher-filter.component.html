@@ -1,0 +1,18 @@
+<div class="suggest-wrap">
+  <input
+    nbInput
+    type="text"
+    [formControl]="inputControl"
+    [placeholder]="column.title"
+    [nbAutocomplete]="auto"
+    [focusInputOnValueChange]="false"
+  />
+
+  <nb-icon class="icon" icon="search"></nb-icon>
+</div>
+
+<nb-autocomplete #auto (selectedChange)="onSelectionChange($event)">
+  <nb-option *ngFor="let option of filteredOptions$ | async" [value]="option">
+    {{ option }}
+  </nb-option>
+</nb-autocomplete>

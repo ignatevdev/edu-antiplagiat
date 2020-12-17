@@ -1,0 +1,19 @@
+<form (ngSubmit)="onCreate()" [formGroup]="form">
+  <nb-card>
+    <nb-card-header>Создание токена</nb-card-header>
+    <nb-card-body>
+      <ap-tokens-form
+        [form]="form"
+        [availablePermissions]="availablePermissions"
+      ></ap-tokens-form>
+    </nb-card-body>
+    <nb-card-footer>
+      <a [routerLink]="['/pages/tokens']">
+        <button nbButton status="basic">Назад</button>
+      </a>
+      <button class="save" nbButton status="primary" type="submit">
+        Создать
+      </button>
+    </nb-card-footer>
+  </nb-card>
+</form>

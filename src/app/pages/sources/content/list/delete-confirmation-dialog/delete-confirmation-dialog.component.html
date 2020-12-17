@@ -1,0 +1,10 @@
+<nb-card>
+  <nb-card-header>Подтвердите действие</nb-card-header>
+  <nb-card-body> Вы уверены, что хотите удалить лиц. контент? </nb-card-body>
+  <nb-card-footer>
+    <button nbButton status="basic" (click)="cancel()">Отмена</button>
+    <button class="delete" nbButton status="danger" (click)="delete()">
+      Удалить
+    </button>
+  </nb-card-footer>
+</nb-card>

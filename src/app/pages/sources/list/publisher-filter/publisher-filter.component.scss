@@ -1,0 +1,17 @@
+.suggest-wrap {
+  position: relative;
+
+  input {
+    padding-right: 30px;
+  }
+
+  .icon {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translate(0, -50%);
+  }
+}
+::ng-deep svg {
+  fill: #767676;
+}

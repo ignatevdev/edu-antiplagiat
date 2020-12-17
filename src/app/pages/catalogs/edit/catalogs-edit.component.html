@@ -1,0 +1,16 @@
+<form (ngSubmit)="onEdit()" [formGroup]="form">
+  <nb-card>
+    <nb-card-header>Редактирование элемента справочника</nb-card-header>
+    <nb-card-body>
+      <ap-catalogs-form [form]="form"></ap-catalogs-form>
+    </nb-card-body>
+    <nb-card-footer>
+      <a [routerLink]="['/pages/catalogs', catalog]">
+        <button nbButton status="basic">Назад</button>
+      </a>
+      <button class="save" nbButton status="primary" type="submit">
+        Сохранить
+      </button>
+    </nb-card-footer>
+  </nb-card>
+</form>
