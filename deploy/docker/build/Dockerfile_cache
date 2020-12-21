@@ -1,4 +1,4 @@
-FROM registry.skyeng.tv/base/angular8:1.1.8 as cache
+FROM registry.skyeng.tv/base/node12:1.1.12 as cache
 
 ARG BUILD_OPTIONS=--prod
 ARG GITHUB_RSA
