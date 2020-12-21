@@ -5,7 +5,7 @@ ARG GITHUB_RSA
 
 WORKDIR /opt/app
 
-COPY package.json yarn.lock ./
+COPY package.json package-lock.json ./
 
 RUN ( \
         setup-github-ssh-access \
