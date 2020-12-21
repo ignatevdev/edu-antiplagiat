@@ -1,11 +1,11 @@
-FROM registry.skyeng.tv/base/angular8:1.1.8 as cache
+FROM registry.skyeng.tv/base/node12:1.1.12 as cache
 
 ARG BUILD_OPTIONS=--prod
 ARG GITHUB_RSA
 
 WORKDIR /opt/app
 
-COPY package.json yarn.lock ./
+COPY package.json package-lock.json ./
 
 RUN ( \
         setup-github-ssh-access \

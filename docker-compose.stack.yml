@@ -29,6 +29,8 @@ services:
             "target": "/opt/app/dist"
           }
         ]
+      ERB_BEGIN_TAG: '<erb'
+      ERB_END_TAG: 'erb>'
     networks:
       - proxy
     volumes:

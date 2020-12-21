@@ -17,6 +17,12 @@ x-base-env-vars: &base-env
 
 deploy:
   locations:
+    staging:
+      environment:
+        envVars: *base-env
+      notification:
+        message: |
+          Application index: https://${NGINX_SERVER_NAME}      
     production:
       environment:
         envVars: *base-env

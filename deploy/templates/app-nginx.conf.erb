@@ -8,7 +8,7 @@ map $sent_http_content_type $expires {
 }
 
 server {
-  server_name <%= ENV.fetch('NGINX_SERVER_NAME') %>;
+  server_name _;
   listen 80;
 
   set $root /opt/app;
