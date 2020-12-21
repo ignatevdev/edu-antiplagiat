@@ -3,7 +3,7 @@ version: "3.7"
 networks:
   proxy:
     external: true
-    name: proxy
+    name: ${SWARM_PROXY_NETWORK}
 
 volumes:
   logs:
