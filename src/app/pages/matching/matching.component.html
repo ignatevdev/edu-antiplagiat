@@ -1,0 +1,51 @@
+<form (ngSubmit)="onSave()" [formGroup]="form">
+  <nb-card>
+    <nb-card-header>Проверка совпадения</nb-card-header>
+    <nb-card-body>
+      <div class="row">
+        <div class="col-lg-12">
+          <label class="label" for="first-text-input">Текст 1</label>
+          <textarea
+            class="first"
+            nbInput
+            id="first-text-input"
+            formControlName="first"
+            fullWidth
+            [required]
+            [status]="
+              (form.controls.first.invalid && form.touched) ||
+              (form.controls.first.invalid && form.controls.first.touched)
+                ? 'danger'
+                : 'basic'
+            "
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <label class="label" for="second-text-input">Текст 2</label>
+          <textarea
+            class="second"
+            nbInput
+            id="second-text-input"
+            formControlName="second"
+            fullWidth
+            [required]
+            [status]="
+              (form.controls.second.invalid && form.touched) ||
+              (form.controls.second.invalid && form.controls.second.touched)
+                ? 'danger'
+                : 'basic'
+            "
+          ></textarea>
+        </div>
+      </div>
+    </nb-card-body>
+    <nb-card-footer>
+      <button class="save" nbButton status="primary" type="submit">
+        Проверить
+      </button>
+    </nb-card-footer>
+  </nb-card>
+</form>

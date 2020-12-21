@@ -1,0 +1,93 @@
+<div [formGroup]="form">
+  <div class="row">
+    <div class="col-lg-6">
+      <label class="label" for="users-first-name-input">Имя</label>
+      <input
+        nbInput
+        formControlName="first_name"
+        fullWidth
+        name="first_name"
+        id="users-first-name-input"
+        fieldSize="large"
+        [status]="
+          (form.controls.first_name.invalid && form.touched) ||
+          (form.controls.first_name.invalid && form.controls.first_name.touched)
+            ? 'danger'
+            : 'basic'
+        "
+      />
+    </div>
+
+    <div class="col-lg-6">
+      <label class="label" for="users-last-name-input">Фамилия</label>
+      <input
+        nbInput
+        formControlName="last_name"
+        fullWidth
+        name="last_name"
+        id="users-last-name-input"
+        fieldSize="large"
+        [status]="
+          (form.controls.last_name.invalid && form.touched) ||
+          (form.controls.last_name.invalid && form.controls.last_name.touched)
+            ? 'danger'
+            : 'basic'
+        "
+      />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <label class="label" for="users-email-input">Email</label>
+      <input
+        nbInput
+        formControlName="email"
+        fullWidth
+        name="email"
+        id="users-email-input"
+        fieldSize="large"
+        [status]="
+          (form.controls.email.invalid && form.touched) ||
+          (form.controls.email.invalid && form.controls.email.touched)
+            ? 'danger'
+            : 'basic'
+        "
+      />
+    </div>
+
+    <div class="col-lg-6">
+      <label class="label" for="users-password-input">Пароль</label>
+      <input
+        nbInput
+        formControlName="password"
+        fullWidth
+        name="password"
+        type="password"
+        id="users-password-input"
+        fieldSize="large"
+        [status]="
+          (form.controls.password.invalid && form.touched) ||
+          (form.controls.password.invalid && form.controls.password.touched)
+            ? 'danger'
+            : 'basic'
+        "
+      />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <label class="label">Права</label>
+
+      <div
+        formArrayName="permissions"
+        *ngFor="let permission of permissionsFormArray.controls; let i = index"
+      >
+        <nb-checkbox [formControlName]="i">
+          {{ permissionNames[availablePermissions[i]] }}
+        </nb-checkbox>
+      </div>
+    </div>
+  </div>
+</div>

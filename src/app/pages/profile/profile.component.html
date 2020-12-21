@@ -1,0 +1,114 @@
+<form (ngSubmit)="onSave()" [formGroup]="form">
+  <nb-card>
+    <nb-card-header>Профиль</nb-card-header>
+    <nb-card-body>
+      <div class="row">
+        <div class="col-lg-12">
+          <label class="label" for="users-email-input">Email</label>
+          <input
+            nbInput
+            formControlName="email"
+            fullWidth
+            name="email"
+            id="users-email-input"
+            fieldSize="large"
+            disabled
+            [status]="
+              (form.controls.email.invalid && form.touched) ||
+              (form.controls.email.invalid && form.controls.email.touched)
+                ? 'danger'
+                : 'basic'
+            "
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6">
+          <label class="label" for="users-first-name-input">Имя</label>
+          <input
+            nbInput
+            formControlName="first_name"
+            fullWidth
+            name="first_name"
+            id="users-first-name-input"
+            fieldSize="large"
+            [status]="
+              (form.controls.first_name.invalid && form.touched) ||
+              (form.controls.first_name.invalid &&
+                form.controls.first_name.touched)
+                ? 'danger'
+                : 'basic'
+            "
+          />
+        </div>
+
+        <div class="col-lg-6">
+          <label class="label" for="users-last-name-input">Фамилия</label>
+          <input
+            nbInput
+            formControlName="last_name"
+            fullWidth
+            name="last_name"
+            id="users-last-name-input"
+            fieldSize="large"
+            [status]="
+              (form.controls.last_name.invalid && form.touched) ||
+              (form.controls.last_name.invalid &&
+                form.controls.last_name.touched)
+                ? 'danger'
+                : 'basic'
+            "
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6">
+          <label class="label" for="users-old-password-input"
+            >Старый пароль</label
+          >
+          <input
+            nbInput
+            formControlName="old_password"
+            fullWidth
+            name="old_password"
+            id="users-old-password-input"
+            fieldSize="large"
+            [status]="
+              (form.controls.old_password.invalid && form.touched) ||
+              (form.controls.old_password.invalid &&
+                form.controls.old_password.touched)
+                ? 'danger'
+                : 'basic'
+            "
+          />
+        </div>
+
+        <div class="col-lg-6">
+          <label class="label" for="users-password-input">Новый пароль</label>
+          <input
+            nbInput
+            formControlName="password"
+            fullWidth
+            name="password"
+            id="users-password-input"
+            fieldSize="large"
+            [status]="
+              (form.hasError('equals') && form.touched) ||
+              (form.controls.password.invalid && form.touched) ||
+              (form.controls.password.invalid && form.controls.password.touched)
+                ? 'danger'
+                : 'basic'
+            "
+          />
+        </div>
+      </div>
+    </nb-card-body>
+    <nb-card-footer>
+      <button class="save" nbButton status="primary" type="submit">
+        Сохранить
+      </button>
+    </nb-card-footer>
+  </nb-card>
+</form>

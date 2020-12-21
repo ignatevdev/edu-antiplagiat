@@ -1,0 +1,95 @@
+<div [formGroup]="form">
+  <div class="row">
+    <div class="col-lg-12">
+      <label class="label" for="content-text-input">Содержимое</label>
+      <textarea
+        class="content"
+        nbInput
+        id="content-text-input"
+        formControlName="content"
+        fullWidth
+        [status]="
+          (form.controls.content.invalid && form.touched) ||
+          (form.controls.content.invalid && form.controls.content.touched)
+            ? 'danger'
+            : 'basic'
+        "
+      ></textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <label class="label" for="content-page-number-input"
+        >Номер страницы</label
+      >
+      <input
+        type="number"
+        nbInput
+        formControlName="page_num"
+        fullWidth
+        id="content-page-number-input"
+        fieldSize="large"
+        [status]="
+          (form.controls.page_num.invalid && form.touched) ||
+          (form.controls.page_num.invalid && form.controls.page_num.touched)
+            ? 'danger'
+            : 'basic'
+        "
+      />
+    </div>
+
+    <div class="col-lg-6">
+      <label class="label" for="content-task-num-input">Номер задания</label>
+      <input
+        nbInput
+        formControlName="task_num"
+        fullWidth
+        id="content-task-num-input"
+        fieldSize="large"
+        [status]="
+          (form.controls.task_num.invalid && form.touched) ||
+          (form.controls.task_num.invalid && form.controls.task_num.touched)
+            ? 'danger'
+            : 'basic'
+        "
+      />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <label class="label" for="content-paragraph-input">Параграф</label>
+      <input
+        nbInput
+        formControlName="paragraph"
+        fullWidth
+        id="content-paragraph-input"
+        fieldSize="large"
+        [status]="
+          (form.controls.paragraph.invalid && form.touched) ||
+          (form.controls.paragraph.invalid && form.controls.paragraph.touched)
+            ? 'danger'
+            : 'basic'
+        "
+      />
+    </div>
+
+    <div class="col-lg-6">
+      <label class="label" for="content-link-input">Ссылка</label>
+      <input
+        nbInput
+        formControlName="link"
+        fullWidth
+        id="content-link-input"
+        fieldSize="large"
+        [status]="
+          (form.controls.link.invalid && form.touched) ||
+          (form.controls.link.invalid && form.controls.link.touched)
+            ? 'danger'
+            : 'basic'
+        "
+      />
+    </div>
+  </div>
+</div>

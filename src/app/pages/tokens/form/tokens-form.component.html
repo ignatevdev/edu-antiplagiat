@@ -1,0 +1,31 @@
+<div class="row" [formGroup]="form">
+  <div class="col-lg-6">
+    <label class="label" for="token-name-input">Название</label>
+    <input
+      nbInput
+      formControlName="name"
+      fullWidth
+      name="name"
+      id="token-name-input"
+      fieldSize="large"
+      [status]="
+        (form.controls.name.invalid && form.touched) ||
+        (form.controls.name.invalid && form.controls.name.touched)
+          ? 'danger'
+          : 'basic'
+      "
+    />
+  </div>
+  <div class="col-lg-6">
+    <label class="label">Права</label>
+
+    <div
+      formArrayName="permissions"
+      *ngFor="let permission of permissionsFormArray.controls; let i = index"
+    >
+      <nb-checkbox [formControlName]="i">
+        {{ permissionNames[availablePermissions[i]] }}
+      </nb-checkbox>
+    </div>
+  </div>
+</div>

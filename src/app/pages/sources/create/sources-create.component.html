@@ -1,0 +1,20 @@
+<form (ngSubmit)="onCreate()" [formGroup]="form">
+  <nb-card>
+    <nb-card-header>Создание источника</nb-card-header>
+    <nb-card-body>
+      <ngx-sources-form
+        [form]="form"
+        [getPublisherOptions]="getPublisherOptions"
+        [getAuthorOptions]="getAuthorOptions"
+      ></ngx-sources-form>
+    </nb-card-body>
+    <nb-card-footer>
+      <a [routerLink]="['/pages/sources']">
+        <button nbButton status="basic">Назад</button>
+      </a>
+      <button class="save" nbButton status="primary" type="submit">
+        Сохранить
+      </button>
+    </nb-card-footer>
+  </nb-card>
+</form>

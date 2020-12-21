@@ -1,0 +1,175 @@
+<div [formGroup]="form">
+  <div class="row">
+    <div class="col-lg-6">
+      <label class="label" for="sources-name-input">Имя</label>
+      <input
+        nbInput
+        formControlName="name"
+        fullWidth
+        name="name"
+        id="sources-name-input"
+        fieldSize="large"
+        [status]="
+          form.controls.name.invalid && form.controls.name.touched
+            ? 'danger'
+            : 'basic'
+        "
+      />
+    </div>
+    <div class="col-lg-6">
+      <label class="label" for="sources-link-input">Предмет</label>
+
+      <nb-select
+        formControlName="subject"
+        fullWidth
+        placeholder="Выберите предмет"
+        size="large"
+        [status]="
+          form.controls.subject.invalid && form.controls.subject.touched
+            ? 'danger'
+            : 'basic'
+        "
+      >
+        <nb-option *ngFor="let option of subjectOptions" [value]="option.key">
+          {{ option.title }}
+        </nb-option>
+      </nb-select>
+    </div>
+    <div class="col-lg-6">
+      <label class="label" for="sources-name-input">Издательство</label>
+      <input
+        formControlName="publisher"
+        nbInput
+        type="text"
+        placeholder="Введите имя издательства"
+        fullWidth
+        fieldSize="large"
+        [nbAutocomplete]="autoPublisher"
+        [status]="
+          form.controls.publisher.invalid && form.controls.publisher.touched
+            ? 'danger'
+            : 'basic'
+        "
+      />
+
+      <nb-autocomplete #autoPublisher>
+        <nb-option
+          *ngFor="let option of publisherOptions$ | async"
+          [value]="option"
+        >
+          {{ option }}
+        </nb-option>
+      </nb-autocomplete>
+    </div>
+    <div class="col-lg-6">
+      <label class="label" for="content-publish-year-input">Год издания</label>
+      <input
+        nbInput
+        formControlName="publish_year"
+        fullWidth
+        id="content-publish-year-input"
+        fieldSize="large"
+        type="number"
+        [required]="form.controls.link.value ? null : true"
+        [status]="
+          form.controls.publish_year.invalid &&
+          form.controls.publish_year.touched
+            ? 'danger'
+            : 'basic'
+        "
+      />
+    </div>
+    <div class="col-lg-6">
+      <label class="label" for="sources-grade-input">Класс</label>
+      <nb-select
+        formControlName="grade"
+        fullWidth
+        placeholder="Выберите предмет"
+        size="large"
+        [status]="
+          form.controls.grade.invalid && form.controls.grade.touched
+            ? 'danger'
+            : 'basic'
+        "
+      >
+        <nb-option *ngFor="let option of gradeOptions" [value]="option">
+          {{ option }}
+        </nb-option>
+      </nb-select>
+    </div>
+
+    <div class="col-lg-6">
+      <label class="label" for="sources-publish-num-input">Издание</label>
+      <input
+        nbInput
+        formControlName="publish_num"
+        fullWidth
+        id="sources-publish-num-input"
+        fieldSize="large"
+        [status]="
+          form.controls.publish_num.invalid && form.controls.publish_num.touched
+            ? 'danger'
+            : 'basic'
+        "
+      />
+    </div>
+
+    <div class="col-lg-6">
+      <label class="label" for="sources-isbn-input">ISBN</label>
+      <input
+        nbInput
+        formControlName="isbn"
+        fullWidth
+        id="sources-isbn-input"
+        fieldSize="large"
+        [status]="
+          form.controls.isbn.invalid && form.controls.isbn.touched
+            ? 'danger'
+            : 'basic'
+        "
+      />
+    </div>
+
+    <div class="col-lg-6">
+      <label class="label" for="sources-link-input">Ссылка</label>
+      <input
+        nbInput
+        formControlName="link"
+        fullWidth
+        id="sources-link-input"
+        fieldSize="large"
+        [status]="
+          form.controls.link.invalid && form.controls.link.touched
+            ? 'danger'
+            : 'basic'
+        "
+      />
+    </div>
+
+    <div class="col-lg-6">
+      <label class="label" for="sources-author-input">Авторы</label>
+
+      <div
+        [class]="
+          form.controls.authors.invalid && form.controls.authors.touched
+            ? 'danger'
+            : 'normal'
+        "
+      >
+        <tag-input
+          formControlName="authors"
+          [clearOnBlur]="true"
+          placeholder="Введите имя автора"
+          secondaryPlaceholder="Введите имя автора"
+          [errorMessages]="authorsErrorMessages"
+        >
+          <tag-input-dropdown
+            [focusFirstElement]="true"
+            [autocompleteObservable]="getAuthorOptions"
+          >
+          </tag-input-dropdown>
+        </tag-input>
+      </div>
+    </div>
+  </div>
+</div>

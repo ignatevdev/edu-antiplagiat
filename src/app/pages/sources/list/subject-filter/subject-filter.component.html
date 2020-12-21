@@ -1,0 +1,7 @@
+<div class="suggest-wrap">
+  <nb-select [formControl]="selectControl" fullWidth placeholder="Предмет">
+    <nb-option *ngFor="let option of subjectOptions" [value]="option.key">
+      {{ option.title }}
+    </nb-option>
+  </nb-select>
+</div>

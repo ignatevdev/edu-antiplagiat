@@ -1,6 +1,12 @@
-import {environment as commonEnv} from './environment.common';
-
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 export const environment = {
-  ...commonEnv,
   production: true,
+  api: {
+    protocol: 'http',
+    host: 'localhost:8001',
+  },
 };

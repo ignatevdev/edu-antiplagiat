@@ -1,0 +1,29 @@
+<nb-card>
+  <nb-card-header
+    >Источники
+
+    <input
+      nbInput
+      type="text"
+      [formControl]="contentControl"
+      placeholder="Поиск по содержанию"
+    />
+
+    <button nbButton status="secondary" class="reset" (click)="resetFilters()">
+      Сбросить фильтры
+    </button>
+    <a [routerLink]="['/pages/sources/create']">
+      <button nbButton status="primary" class="create">Создать</button>
+    </a>
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table
+      [settings]="settings"
+      [source]="source"
+      (edit)="onEdit($event)"
+      (delete)="onDelete($event)"
+    >
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
