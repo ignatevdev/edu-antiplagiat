@@ -27,7 +27,7 @@ import {
   NbAuthSimpleToken,
 } from '@nebular/auth';
 
-const apiEndPoint = 'http://127.0.0.1:8001';
+const apiEndPoint = 'https://api-edu-antiplagiat.skyeng.ru';
 
 @NgModule({
   declarations: [AppComponent],
