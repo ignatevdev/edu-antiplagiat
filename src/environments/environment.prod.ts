@@ -7,6 +7,6 @@ export const environment = {
   production: true,
   api: {
     protocol: 'https',
-    host: 'api-edu-antiplagiat.skyeng.ru',
+    host: 'api-edu-antiplagiat.skyeng.link',
   },
 };
