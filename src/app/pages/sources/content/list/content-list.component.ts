@@ -124,11 +124,11 @@ export class ContentListComponent implements OnInit {
     const { id } = e.data;
 
     const onDelete = async () => {
-      await this.source.remove({ id: e.data.id });
+      await this.dataSource.remove({ id });
 
-      const data = await this.source.getElements();
+      const data = await this.dataSource.getElements();
 
-      this.source.load(data);
+      this.dataSource.load(data);
     };
 
     this.dialogService.open(DeleteConfirmationDialogComponent, {
