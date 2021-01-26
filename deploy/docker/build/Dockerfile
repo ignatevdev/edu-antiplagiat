@@ -8,7 +8,7 @@ COPY ./deploy/templates/vars.ts.erb /opt/app/src/environments/vars.ts
 RUN ng build "$BUILD_OPTIONS"
 
 # prod nginx
-FROM registry.skyeng.tv/base/nginx1.17:1.6.3 as nginx
+FROM registry.skyeng.tv/base/nginx1.17:1.6.13 as nginx
 
 COPY --from=builder --chown=nginx:nginx /opt/app/dist /opt/app/dist
 COPY ./deploy/templates/app-nginx.conf.erb /etc/nginx/sites-templates/app-nginx.conf.erb
